@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.STOCKSAPP" parent="Theme.AppCompat.Light">
+
+        <item name="colorPrimaryDark">@color/dark_purple</item>
+        <item name="colorPrimary">@color/purple</item>
+        <item name="colorAccent">@color/purple</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppTheme.ActionBar</item>
+    </style>
+
+
+    <style name="ThemeOverlay.AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
+
+</resources>
