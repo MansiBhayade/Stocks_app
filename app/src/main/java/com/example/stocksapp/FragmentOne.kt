@@ -1,16 +1,107 @@
 package com.example.stocksapp
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class FragmentOne : Fragment() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: StockAdapter
+    private val stocks = mutableListOf<Stock>()
+    private lateinit var progressBar: View
+    private lateinit var errorText: View
+    private lateinit var emptyText: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_one, container, false)
+        val view = inflater.inflate(R.layout.fragment_one, container, false)
+
+        recyclerView = view.findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        adapter = StockAdapter(stocks)
+        recyclerView.adapter = adapter
+
+        progressBar = view.findViewById(R.id.progress_bar)
+        errorText = view.findViewById(R.id.error_text)
+        emptyText = view.findViewById(R.id.empty_text)
+
+        fetchTopGainers()
+
+        return view
+    }
+
+    private fun fetchTopGainers() {
+        showLoading()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://www.alphavantage.co/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val api = retrofit.create(StockApiService::class.java)
+
+        api.getTopGainers().enqueue(object : Callback<StockDataResponse> {
+            override fun onResponse(call: Call<StockDataResponse>, response: Response<StockDataResponse>) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        stocks.clear()
+                        stocks.addAll(it.top_gainers)
+                        adapter.notifyDataSetChanged()
+                        if (stocks.isEmpty()) {
+                            showEmptyState()
+                        } else {
+                            showContent()
+                        }
+                    } ?: showEmptyState()
+                } else {
+                    showError()
+                }
+            }
+
+            override fun onFailure(call: Call<StockDataResponse>, t: Throwable) {
+                showError()
+            }
+        })
+    }
+
+    private fun showLoading() {
+        progressBar.visibility = View.VISIBLE
+        recyclerView.visibility = View.GONE
+        errorText.visibility = View.GONE
+        emptyText.visibility = View.GONE
+    }
+
+    private fun showError() {
+        progressBar.visibility = View.GONE
+        recyclerView.visibility = View.GONE
+        errorText.visibility = View.VISIBLE
+        emptyText.visibility = View.GONE
+    }
+
+    private fun showEmptyState() {
+        progressBar.visibility = View.GONE
+        recyclerView.visibility = View.GONE
+        errorText.visibility = View.GONE
+        emptyText.visibility = View.VISIBLE
+    }
+
+    private fun showContent() {
+        progressBar.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
+        errorText.visibility = View.GONE
+        emptyText.visibility = View.GONE
     }
 }
+
