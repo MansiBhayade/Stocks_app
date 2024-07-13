@@ -8,12 +8,112 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#A982E7"
-        />
+        android:background="#A982E7" />
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:id="@+id/text"/>-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:padding="16dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Symbol" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description" />
+
+            <TextView
+                android:id="@+id/industry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Industry" />
+
+            <TextView
+                android:id="@+id/sector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sector" />
+
+            <TextView
+                android:id="@+id/high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="52 Week High" />
+
+            <TextView
+                android:id="@+id/low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="52 Week Low" />
+
+            <TextView
+                android:id="@+id/market_cap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Market Capitalization" />
+
+            <TextView
+                android:id="@+id/pe_ratio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="P/E Ratio" />
+
+            <TextView
+                android:id="@+id/beta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Beta" />
+
+            <TextView
+                android:id="@+id/dividend_yield"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dividend Yield" />
+
+            <TextView
+                android:id="@+id/profit_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profit Margin" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Error loading data."
+        android:visibility="gone"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No data available."
+        android:visibility="gone"
+        android:textColor="@android:color/darker_gray" />
 </RelativeLayout>
