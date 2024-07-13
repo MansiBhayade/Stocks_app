@@ -28,6 +28,7 @@
         <activity android:name=".Stock"></activity>
         <activity android:name=".StockAdapter"></activity>
         <activity android:name="StockApiService"></activity>
+        <activity android:name=".DetailsActivity"></activity>
     </application>
 
 </manifest>

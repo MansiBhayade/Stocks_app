@@ -6,7 +6,8 @@
     android:layout_margin="8dp"
     android:elevation="4dp"
     android:background="#DDD7E8"
-    app:cardBackgroundColor="#DDD7E8">
+    app:cardBackgroundColor="#DDD7E8"
+    android:clickable="true">
 
     <LinearLayout
         android:layout_width="match_parent"

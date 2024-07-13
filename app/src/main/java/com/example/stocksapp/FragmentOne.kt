@@ -1,5 +1,6 @@
 package com.example.stocksapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FragmentOne : Fragment() {
+class FragmentOne : Fragment(), StockAdapter.OnStockItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: StockAdapter
@@ -30,16 +31,26 @@ class FragmentOne : Fragment() {
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
-        adapter = StockAdapter(stocks,true)
+        adapter = StockAdapter(stocks,true, this)
         recyclerView.adapter = adapter
 
         progressBar = view.findViewById(R.id.progress_bar)
         errorText = view.findViewById(R.id.error_text)
         emptyText = view.findViewById(R.id.empty_text)
 
+
+
+
         fetchTopGainers()
 
         return view
+    }
+
+    override fun onStockItemClick(ticker: String) {
+        // Handle item click here, e.g., navigate to a new screen with the ticker
+        val intent = Intent(requireContext(), DetailsActivity::class.java)
+        intent.putExtra("ticker", ticker)
+        startActivity(intent)
     }
 
     private fun fetchTopGainers() {
