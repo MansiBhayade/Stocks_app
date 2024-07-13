@@ -1,7 +1,8 @@
 package com.example.stocksapp
 
 data class StockDataResponse(
-    val top_gainers: List<Stock>
+    val top_gainers: List<Stock>,
+    val top_losers: List<Stock>
 )
 
 data class Stock(

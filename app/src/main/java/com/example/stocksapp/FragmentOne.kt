@@ -30,7 +30,7 @@ class FragmentOne : Fragment() {
 
         recyclerView = view.findViewById(R.id.recycler_view)
         recyclerView.layoutManager = GridLayoutManager(context, 2)
-        adapter = StockAdapter(stocks)
+        adapter = StockAdapter(stocks,true)
         recyclerView.adapter = adapter
 
         progressBar = view.findViewById(R.id.progress_bar)
