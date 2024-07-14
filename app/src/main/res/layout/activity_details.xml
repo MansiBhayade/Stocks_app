@@ -22,76 +22,209 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/symbol"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Symbol" />
-
-            <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name" />
+                android:text="Name"
+                android:textColor="@color/black"
+                android:textSize="26dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Symbol"
+                android:textColor="#343232"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:color/transparent" />
+
+
 
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description" />
+                android:text="Description"
+                android:textColor="@color/grey"
+                android:textSize="15dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:id="@+id/industry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Industry" />
+                android:text="Industry"
+                android:textColor="#EF8011"/>
 
             <TextView
                 android:id="@+id/sector"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sector" />
+                android:text="Sector"
+                android:textColor="#EF8011"/>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/high"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="52 Week High" />
 
             <TextView
                 android:id="@+id/low"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="52 Week Low" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/market_cap"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Market Capitalization" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/pe_ratio"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="P/E Ratio" />
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:layout_marginTop="10dp">
 
-            <TextView
-                android:id="@+id/beta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Beta" />
+                <TextView
+                    android:id="@+id/marketcap_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Market Cap"
+                    android:textColor="@android:color/darker_gray" />
 
-            <TextView
-                android:id="@+id/dividend_yield"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dividend Yield" />
+                <TextView
+                    android:id="@+id/market_cap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cap Value"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/profit_margin"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Profit Margin" />
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/peratio_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P/E Ratio"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/pe_ratio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PERatio"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/beta_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Beta"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/beta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Beta"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/Dividend_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Divident Yeild"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/dividend_yield"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yeild"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:id="@+id/profitmargin_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profit Margin"
+                    android:textColor="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/profit_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profit"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
         </LinearLayout>
     </ScrollView>
 

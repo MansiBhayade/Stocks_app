@@ -1,5 +1,6 @@
 package com.example.stocksapp
 
+import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,4 +17,9 @@ interface StockApiService {
     fun getStockOverview(
         @Query("symbol") symbol: String
     ): Call<StockOverviewResponse>
+
+    @GET("query?function=TIME_SERIES_DAILY&apikey=C5X7MVXVTV2A0NXD")
+    fun getDailyPrices(
+        @Query("symbol") symbol: String
+    ): Call<JsonObject>
 }

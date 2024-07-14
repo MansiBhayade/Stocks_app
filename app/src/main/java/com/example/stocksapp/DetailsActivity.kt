@@ -2,7 +2,6 @@ package com.example.stocksapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -11,6 +10,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.github.mikephil.charting.charts.LineChart
+
+
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -29,6 +31,7 @@ class DetailsActivity : AppCompatActivity() {
     private lateinit var errorView: View
     private lateinit var emptyView: View
     private lateinit var ticker: String
+    private lateinit var lineChart: LineChart
 
 
 
@@ -39,6 +42,8 @@ class DetailsActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+
 
 //        val tickerTextView = findViewById<TextView>(R.id.text)
 
@@ -162,15 +167,15 @@ class DetailsActivity : AppCompatActivity() {
         symbolTextView.text = stockDetails.Symbol ?: ""
         nameTextView.text = stockDetails.Name ?: ""
         descriptionTextView.text = stockDetails.Description ?: ""
-        industryTextView.text = stockDetails.Industry ?: ""
-        sectorTextView.text = stockDetails.Sector ?: ""
-        highTextView.text = stockDetails.FiftyTwoWeekHigh ?: ""
-        lowTextView.text = stockDetails.FiftyTwoWeekLow ?: ""
+        industryTextView.text = "Industry: ${stockDetails.Industry ?: ""}"
+        sectorTextView.text = "Sector: ${stockDetails.Sector ?: ""}"
+        highTextView.text = "52 Week High: ${stockDetails.FiftyTwoWeekHigh ?: ""}"
+        lowTextView.text = "52 Week Low: ${stockDetails.FiftyTwoWeekLow ?: ""}"
         marketCapTextView.text = stockDetails.MarketCapitalization ?: ""
         peRatioTextView.text = stockDetails.PERatio ?: ""
         betaTextView.text = stockDetails.Beta ?: ""
-        dividendYieldTextView.text = stockDetails.DividendYield ?: ""
-        profitMarginTextView.text = stockDetails.ProfitMargin ?: ""
+        dividendYieldTextView.text = "Dividend Yield: ${stockDetails.DividendYield ?: ""}"
+        profitMarginTextView.text = "Profit Margin: ${stockDetails.ProfitMargin ?: ""}"
     }
 }
 
