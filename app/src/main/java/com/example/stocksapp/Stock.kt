@@ -26,3 +26,4 @@ data class StockOverviewResponse(
     val ProfitMargin: String?
 )
 
+

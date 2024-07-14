@@ -5,12 +5,22 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.google.gson.JsonObject
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.github.mikephil.charting.charts.LineChart
+
+
 
 
 
@@ -35,6 +45,8 @@ class DetailsActivity : AppCompatActivity() {
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -44,6 +56,7 @@ class DetailsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
+        lineChart = findViewById(R.id.lineChart)
 
 //        val tickerTextView = findViewById<TextView>(R.id.text)
 
@@ -82,6 +95,22 @@ class DetailsActivity : AppCompatActivity() {
             .build()
 
         val service = retrofit.create(StockApiService::class.java)
+        val call = service.getDailyPrices(ticker)
+
+
+        call.enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                if (response.isSuccessful) {
+                    response.body()?.let { jsonObject ->
+                        parseResponse(jsonObject)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                showError()
+            }
+        })
 
         service.getStockOverview(ticker).enqueue(object : Callback<StockOverviewResponse> {
             override fun onResponse(
@@ -105,6 +134,43 @@ class DetailsActivity : AppCompatActivity() {
                 showError()
             }
         })
+    }
+
+    private fun parseResponse(jsonObject: JsonObject) {
+
+        val timeSeries = jsonObject.getAsJsonObject("Time Series (Daily)")
+        val entries = mutableListOf<Entry>()
+        val dates = mutableListOf<String>()
+
+        timeSeries.entrySet().forEachIndexed { index, entry ->
+            val date = entry.key
+            val close = entry.value.asJsonObject.get("4. close").asFloat
+            entries.add(Entry(index.toFloat(), close))
+            dates.add(date)
+        }
+
+        val dataSet = LineDataSet(entries, "Daily Close Prices")
+        dataSet.color = resources.getColor(R.color.purple)
+        dataSet.valueTextColor = resources.getColor(R.color.black)
+        dataSet.lineWidth = 2f
+
+        val lineData = LineData(dataSet)
+        lineChart.data = lineData
+
+        val xAxis: XAxis = lineChart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(false)
+        xAxis.valueFormatter = IndexAxisValueFormatter(dates)
+
+        val leftAxis: YAxis = lineChart.axisLeft
+        leftAxis.setDrawGridLines(false)
+
+        val rightAxis: YAxis = lineChart.axisRight
+        rightAxis.setDrawGridLines(false)
+        rightAxis.isEnabled = false
+
+        lineChart.description.isEnabled = false
+        lineChart.invalidate()
     }
 
 
@@ -174,8 +240,8 @@ class DetailsActivity : AppCompatActivity() {
         marketCapTextView.text = stockDetails.MarketCapitalization ?: ""
         peRatioTextView.text = stockDetails.PERatio ?: ""
         betaTextView.text = stockDetails.Beta ?: ""
-        dividendYieldTextView.text = "Dividend Yield: ${stockDetails.DividendYield ?: ""}"
-        profitMarginTextView.text = "Profit Margin: ${stockDetails.ProfitMargin ?: ""}"
+        dividendYieldTextView.text = stockDetails.DividendYield ?: ""
+        profitMarginTextView.text = stockDetails.ProfitMargin ?: ""
     }
 }
 
