@@ -1,5 +1,6 @@
 package com.example.stocksapp
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -54,6 +55,17 @@ class DetailsActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setTitle("Details")
+        toolbar.setTitleTextColor(resources.getColor(R.color.white, theme))
+
+        val currentMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+// Dynamically set app theme based on system theme
+        if (currentMode == Configuration.UI_MODE_NIGHT_YES) {
+            setTheme(R.style.AppTheme_Dark)
+        } else {
+            setTheme(R.style.AppTheme_Light)
+        }
 
 
         lineChart = findViewById(R.id.lineChart)
@@ -235,8 +247,8 @@ class DetailsActivity : AppCompatActivity() {
         descriptionTextView.text = stockDetails.Description ?: ""
         industryTextView.text = "Industry: ${stockDetails.Industry ?: ""}"
         sectorTextView.text = "Sector: ${stockDetails.Sector ?: ""}"
-        highTextView.text = "52 Week High: ${stockDetails.FiftyTwoWeekHigh ?: ""}"
-        lowTextView.text = "52 Week Low: ${stockDetails.FiftyTwoWeekLow ?: ""}"
+        highTextView.text = "52 Week High: ${stockDetails.`52WeekHigh` ?: ""}"
+        lowTextView.text = "52 Week Low: ${stockDetails.`52WeekLow` ?: ""}"
         marketCapTextView.text = stockDetails.MarketCapitalization ?: ""
         peRatioTextView.text = stockDetails.PERatio ?: ""
         betaTextView.text = stockDetails.Beta ?: ""
